@@ -1,0 +1,22 @@
+version: '3.8'
+
+services:
+  rental-bot:
+    build: .
+    container_name: rental-bot
+    restart: unless-stopped
+    env_file:
+      - .env
+    volumes:
+      - ./data:/app/data
+      - ./images:/app/images
+      - ./artifacts:/app/artifacts
+    environment:
+      - TELEGRAM_BOT_TOKEN=${TELEGRAM_BOT_TOKEN}
+      - SCRAPE_CITY=${SCRAPE_CITY:-moskva}
+      - SCRAPE_ROOMS=${SCRAPE_ROOMS:-}
+      - SCRAPE_MAX_PRICE=${SCRAPE_MAX_PRICE:-}
+      - SCRAPE_INTERVAL=${SCRAPE_INTERVAL:-3600}
+
+
+
